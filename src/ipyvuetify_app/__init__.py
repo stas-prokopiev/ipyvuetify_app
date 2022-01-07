@@ -1,1 +1,9 @@
-__version__ = '0.1.0'
+""""""
+# Standard library imports
+
+# Third party imports
+
+# Local imports
+from .app import VueApp
+
+__all__ = ["VueApp"]
