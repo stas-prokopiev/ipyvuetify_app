@@ -1,5 +1,17 @@
-from ipyvuetify_app import __version__
+""""""
+# Standard library imports
+
+# Third party imports
+
+# Local imports
 
 
-def test_version():
-    assert __version__ == '0.1.0'
+def test_that_app_starts():
+    """"""
+    from ipyvuetify_app import VueApp
+    from ipyvuetify_app import VueAppRouter
+    vue_app_router = VueAppRouter()
+    VueApp(
+        vue_app_router,
+        list_footer_vw_children=["Footer example"],
+    )

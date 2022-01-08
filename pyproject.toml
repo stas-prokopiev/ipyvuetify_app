@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ipyvuetify_app"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["stanislav <stas.prokopiev@gmail.com>"]
 license = "MIT"
@@ -11,9 +11,12 @@ readme = "README.rst"
 python = "^3.7"
 ipyvuetify = "^1.8.1"
 ipywidgets = "^7.6.5"
+char = "^0.1.2"
 
 [tool.poetry.dev-dependencies]
 ipykernel = "^6.6.0"
+pytest = "^6.2.5"
+pytest-cov = "^3.0.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
