@@ -41,6 +41,7 @@ How to use it
 | Then you just give it to ipyvuetify_app.VueApp and it does all the magic for you
 
 .. code-block:: python
+
     from ipyvuetify_app import VueApp
     from ipyvuetify_app import VueAppRouter
     vue_app_router = VueAppRouter()
