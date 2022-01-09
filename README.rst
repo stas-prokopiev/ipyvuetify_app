@@ -43,7 +43,7 @@ A few more examples how header navigation works
 
 |pic3| |pic4|
 
-.. |pic3| image:: images/light_menu_opened.PNG
+.. |pic3| image:: images/light_menu_opened.png
    :height: 300px
 
 .. |pic4| image:: images/light_too_many_menu_items.PNG
@@ -123,7 +123,6 @@ Links
 =====
 
     * `PYPI <https://pypi.org/project/ipyvuetify_app/>`_
-    * `readthedocs <https://ipyvuetify_app.readthedocs.io/en/latest/>`_
     * `GitHub <https://github.com/stas-prokopiev/ipyvuetify_app>`_
 
 Project local Links
