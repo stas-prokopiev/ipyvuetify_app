@@ -227,8 +227,6 @@ class VueApp(v.App):
                         v_on="menuData.on",
                         text=True,
                         color="primary",
-                        class_="ma-0 pa-0",
-                        disabled=False,
                         rounded=True,
                         children=[str_item]
                     )
@@ -244,7 +242,7 @@ class VueApp(v.App):
                     partial(self.change_main_content, str_item, str_subitem)
                 )
                 list_menu_subitems.append(vw_item)
-            vw_menu.children = list_menu_subitems
+            vw_menu.children = [v.List(children=list_menu_subitems)]
             list_tabs_children.append(v.SlideItem(children=[vw_menu]))
         self.vw_appbar_menu.children = [
             v.Row(justify="center", children=list_tabs_children)]
@@ -265,6 +263,7 @@ class VueApp(v.App):
                     "children": v.Btn(
                         v_on="menuData.on",
                         text=True,
+                        color="primary",
                         rounded=True,
                         children=[str(str_item)]
                     )
@@ -280,6 +279,6 @@ class VueApp(v.App):
                     partial(self.change_main_content, str_item, str_subitem)
                 )
                 list_menu_subitems.append(vw_item)
-            vw_menu.children = list_menu_subitems
+            vw_menu.children = [v.List(children=list_menu_subitems)]
             list_drawer_rows.append(v.Row(justify="center", children=[vw_menu]))
         self.vw_navigation_drawer.children = list_drawer_rows

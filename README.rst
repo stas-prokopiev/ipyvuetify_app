@@ -23,7 +23,31 @@ ipyvuetify_app
 
 Short Overview.
 =========================
-ipyvuetify_app is a python package (**py>=3.7**) with a scaffold/template for writing ipyvuetify application
+ipyvuetify_app is a python package (**py>=3.7**) with a simple template for writing ipyvuetify application
+
+Examples how your app can look like
+----------------------------------------
+
+|pic1| |pic2|
+
+.. |pic1| image:: images/light_1.PNG
+   :height: 300px
+
+.. |pic2| image:: images/dark_1.PNG
+   :height: 300px
+
+Application from the box supports theme switcher and navigation over different content by menus on top
+
+A few more examples how header navigation works
+------------------------------------------------
+
+|pic3| |pic4|
+
+.. |pic3| image:: images/light_menu_opened.PNG
+   :height: 300px
+
+.. |pic4| image:: images/light_too_many_menu_items.PNG
+   :height: 300px
 
 Installation via pip:
 ======================
@@ -35,72 +59,43 @@ Installation via pip:
 How to use it
 ===========================
 
-| To create an application by the given template you need to create a class
+| To create an application by the given template you need to create a routing class
 | That will be in charge of what to show in the main application section
 | For every selected menu item -> subitem
-| Then you just give it to ipyvuetify_app.VueApp and it does all the magic for you
+| Then you just give the router to **ipyvuetify_app.VueApp(...)** and it does all the magic for you
 
 .. code-block:: python
 
     from ipyvuetify_app import VueApp
     from ipyvuetify_app import VueAppRouter
-    vue_app_router = VueAppRouter()
-    VueApp(
-        vue_app_router,
-        list_footer_vw_children=["Footer example"],
-    )
 
-Examples how your app can look like
-----------------------------------------
+    vue_app_router_example = VueAppRouter()
+    VueApp(vue_app_router_example)
 
-.. image:: images/light_1.PNG
-.. image:: images/dark_1.PNG
 
-Router example
-*********************
+How to write a Router
+----------------------
 
 | Every router should satisfy 2 conditions:
-| 1) It has method **get_main_content(self, item, subitem)** which should return page main content
+| 1) It has method **get_main_content(self, item, subitem)** which should return page's main content
 | 2) It has attribute **self.dict_list_subitems_by_item** with all subitems for every menu item
+
+Simple Router example
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: python
 
     class VueAppRouter():
-        """Routing for VueApp to emulate transition over pages in the app"""
 
-        def __init__(self) -> None:
-            """Initialize dictionary with all menus and their subitems"""
+        def __init__(self):
             self.dict_list_subitems_by_item = {}
             for item in range(5):
                 list_subitems = [str(subitem) for subitem in range(item, 5 + item)]
                 self.dict_list_subitems_by_item[str(item)] = list_subitems
 
         def get_main_content(self, item, subitem):
-            """Router to get main content for clicked submenu element
+            return f"{item} -> {subitem}"
 
-            Args:
-                item (str): selected menu
-                subitem (str): submenu element for which to build a page
-
-            Returns:
-                ipyvuetify container or string: page content to show at main section
-            """
-            try:
-                sleep(int(item))
-                return f"{item} -> {subitem}"
-            except Exception as ex:
-                return self.error_page_content(str(ex))
-
-        def error_page_content(self, str_error="Unable to get page content"):
-            """Return content of error message to show when something going wrong
-
-            Args:
-                str_error (str, optional): Error message to show
-
-            Returns:
-                [str]: Error message to display
-            """
-            return f"ERROR: {str_error}"
 
 Full VuaApp signature
 =============================
@@ -113,6 +108,16 @@ Full VuaApp signature
         list_vw_fab_app_bar_right=None,
         list_footer_vw_children=None,
     )
+
+Arguments:
+
+#. **list_vw_fab_app_bar_left**:
+    | List with ipyvuetify fab icon buttons to put on the left side of Application Header Bar
+#. **list_vw_fab_app_bar_right**:
+    | List with ipyvuetify fab icon buttons to put on the right side of Application Header Bar
+#. **list_footer_vw_children**:
+    | List with ipyvuetify widgets to put in the footer
+    | If empty then footer is not shown at all
 
 Links
 =====
