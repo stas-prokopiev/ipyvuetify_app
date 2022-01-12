@@ -26,6 +26,9 @@ class VueAppRouter():
         Returns:
             ipyvuetify container or string: page content to show at main section
         """
+        if str(item) == "3":
+            raise ValueError("ValueError check")
+
         try:
             sleep(int(item))
             return f"{item} -> {subitem}"

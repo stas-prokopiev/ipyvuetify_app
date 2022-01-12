@@ -1,5 +1,6 @@
 """ipyvuetify App template"""
 # Standard library imports
+import traceback
 from functools import partial
 
 # Third party imports
@@ -99,7 +100,6 @@ class VueApp(v.App):
                 )
             ],
         )
-
     @char
     def build_app_container(
             self,
@@ -162,7 +162,7 @@ class VueApp(v.App):
             self.vw_navigation_drawer,
             self.vw_app_main,
             self.vw_footer,
-            self.vw_dialog_page_loading
+            self.vw_dialog_page_loading,
         ]
 
     def change_theme(self, *_):
@@ -189,6 +189,7 @@ class VueApp(v.App):
     def update_app_routing(self):
         """Update menus if router was changed"""
         self.build_routing_appbar()
+        self.build_routing_navigation_drawer()
 
     @char
     def change_main_content(self, str_item, str_subitem, *_):
@@ -205,9 +206,38 @@ class VueApp(v.App):
             str_item = list(self.router.dict_list_subitems_by_item)[0]
         if str_subitem is None:
             str_subitem = self.router.dict_list_subitems_by_item[str_item][0]
-        self.vw_app_main.children = [
-            self.router.get_main_content(str_item, str_subitem)
-        ]
+
+        try:
+            self.vw_app_main.children = [
+                self.router.get_main_content(str_item, str_subitem)
+            ]
+        except Exception as ex:
+            vw_btn_show_traceback = v.Btn(color="error", children=["Show Full Traceback"])
+            vw_alert = v.Alert(
+                type_="error",
+                color="error",
+                dense=True,
+                outlined=True,
+                dismissible=True,
+                children=[
+                    v.Row(justify="center", children=[
+                        f"During page load exception happen: {ex}"]),
+                    v.Row(justify="center", children=[vw_btn_show_traceback]),
+                ]
+            )
+            def show_traceback(ex, *_):
+                vw_btn_show_traceback.disabled = True
+                list_rows = []
+                for str_traceback_row in traceback.format_tb(ex.__traceback__):
+                    list_rows.append(v.Row(children=[str_traceback_row]))
+                vw_alert.children = vw_alert.children + list_rows
+            vw_btn_show_traceback.on_event(
+                "click", partial(show_traceback, ex))
+            self.children = self.children + [vw_alert]
+
+
+
+
         self.vw_dialog_page_loading.v_model = False
 
     def build_routing_appbar(self):
