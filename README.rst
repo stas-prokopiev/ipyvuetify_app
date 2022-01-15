@@ -121,7 +121,7 @@ Arguments:
 
 
 VuaApp object description
-----------------------
+--------------------------------------------
 
 VuaApp is a child of v.App so it has all the parent methods and attributes
 
