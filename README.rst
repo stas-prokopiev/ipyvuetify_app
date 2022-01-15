@@ -98,7 +98,7 @@ Simple Router example
 
 
 Full VuaApp signature
-=============================
+----------------------
 
 .. code-block:: python
 
@@ -118,6 +118,31 @@ Arguments:
 #. **list_footer_vw_children**:
     | List with ipyvuetify widgets to put in the footer
     | If empty then footer is not shown at all
+
+
+VuaApp object description
+----------------------
+
+VuaApp is a child of v.App so it has all the parent methods and attributes
+
+Useful Attributes:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. **self.vw_appbar**:
+    | v.AppBar(app=True, ...) - Application top bar
+#. **self.vw_navigation_drawer**:
+    | v.NavigationDrawer(app=True, ...) - Navigation Drawer at the left side
+#. **self.vw_app_main**:
+    | v.Content() - Main section of the application
+#. **self.vw_footer**:
+    | v.Footer(app=True, ...) - Footer of the application
+
+
+Useful Methods:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. **self.update_app_routing()**:
+    | When router items were updated please call this method to update application menus
 
 Links
 =====

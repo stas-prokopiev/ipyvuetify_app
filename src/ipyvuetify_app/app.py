@@ -212,32 +212,33 @@ class VueApp(v.App):
                 self.router.get_main_content(str_item, str_subitem)
             ]
         except Exception as ex:
-            vw_btn_show_traceback = v.Btn(color="error", children=["Show Full Traceback"])
+            list_rows = []
+            for str_traceback_row in traceback.format_tb(ex.__traceback__):
+                list_rows.append(v.Row(children=[str_traceback_row]))
+            vw_exp_panel_traceback = v.ExpansionPanels(children=[
+                v.ExpansionPanel(children=[
+                    v.ExpansionPanelHeader(children=[
+                        v.Row(justify="center", color="info", children=[
+                            v.Html(tag="b", children=["Full traceback:"])
+                        ])
+                    ]),
+                    v.ExpansionPanelContent(children=list_rows),
+                ])
+            ])
             vw_alert = v.Alert(
                 type_="error",
                 color="error",
+                class_="mb-5",
                 dense=True,
                 outlined=True,
                 dismissible=True,
                 children=[
                     v.Row(justify="center", children=[
                         f"During page load exception happen: {ex}"]),
-                    v.Row(justify="center", children=[vw_btn_show_traceback]),
+                    vw_exp_panel_traceback,
                 ]
             )
-            def show_traceback(ex, *_):
-                vw_btn_show_traceback.disabled = True
-                list_rows = []
-                for str_traceback_row in traceback.format_tb(ex.__traceback__):
-                    list_rows.append(v.Row(children=[str_traceback_row]))
-                vw_alert.children = vw_alert.children + list_rows
-            vw_btn_show_traceback.on_event(
-                "click", partial(show_traceback, ex))
             self.children = self.children + [vw_alert]
-
-
-
-
         self.vw_dialog_page_loading.v_model = False
 
     def build_routing_appbar(self):
