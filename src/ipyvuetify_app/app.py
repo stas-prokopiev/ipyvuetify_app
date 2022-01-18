@@ -16,6 +16,7 @@ from char import char
 # background-color: black !important;
 CSS_DELETE_MARGINS = """
 <style>
+    body {overflow: hidden !important; }
     .jp-Notebook {margin: 0px !important; padding: 0px !important;}
     .jp-Cell {margin: 0px !important; padding: 0px !important;}
     .jupyter-widgets {margin: 0px !important;}
@@ -33,6 +34,7 @@ class VueApp(v.App):
             list_vw_fab_app_bar_left=None,
             list_vw_fab_app_bar_right=None,
             list_footer_vw_children=None,
+            app_css_style=None,
     ):
         """ipyvuetify App where only main section is up to user
 
@@ -45,7 +47,9 @@ class VueApp(v.App):
         display(HTML(CSS_DELETE_MARGINS))
         super().__init__(
             class_="ma-0 pa-2",
-            style_="min-height:98vh;"
+            style_=app_css_style,
+            # style_="overflow: hidden; height: 100vh;"
+            # style_="min-height:98vh;"
             # style_="min-height:99vh; width:99vw; "
         )
         self.router = vue_app_router
