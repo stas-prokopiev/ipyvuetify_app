@@ -107,6 +107,7 @@ Full VuaApp signature
         list_vw_fab_app_bar_left=None,
         list_vw_fab_app_bar_right=None,
         list_footer_vw_children=None,
+        app_css_style=None,
     )
 
 Arguments:
@@ -118,7 +119,8 @@ Arguments:
 #. **list_footer_vw_children**:
     | List with ipyvuetify widgets to put in the footer
     | If empty then footer is not shown at all
-
+#. **app_css_style**:
+    | String with css styles to apply on v.App
 
 VuaApp object description
 --------------------------------------------
